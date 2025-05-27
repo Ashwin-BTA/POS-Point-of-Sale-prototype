@@ -1,1 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Prototype</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy-blue': '#1a365d',
+                        'light-blue': '#90cdf4',
+                    }
+                }
+            },
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        .modal {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: scale(0.95);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .modal.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        /* Keep all backgrounds white even in dark mode */
+        .dark .bg-white,
+        .dark .modal {
+            background-color: #ffffff;
+        }
+        .dark .border-gray-200 {
+            border-color: #333;
+        }
+        .dark .text-gray-700,
+        .dark .text-gray-600 {
+            color: #333;
+        }
+        .dark .shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    <!-- Navy Blue Header -->
+    <header class="bg-navy-blue text-white py-4 shadow-md mb-8">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center">Retail Prototype</h1>
+        </div>
+    </header>
+    
+    <div class="container mx-auto px-4 py-4">
+        <!-- Subtitle -->
+        <div class="text-center mb-12">
+            <p class="text-gray-600 text-lg">Select your role to login</p>
+        </div>
 
+        <!-- Role Selection -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <!-- Retailer -->
+            <div class="role-card bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-light-blue rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-navy-blue mb-2">Retailer</h2>
+                    <p class="text-gray-600 text-center mb-4">Access retailer dashboard and management tools</p>
+                    <button class="login-btn w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300" data-role="retailer">
+                        Login
+                    </button>
+                </div>
+            </div>
+
+            <!-- Supervisor -->
+            <div class="role-card bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-light-blue rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-navy-blue mb-2">Supervisor</h2>
+                    <p class="text-gray-600 text-center mb-4">Manage teams and oversee retail operations</p>
+                    <button class="login-btn w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300" data-role="supervisor">
+                        Login
+                    </button>
+                </div>
+            </div>
+
+            <!-- Order Manager -->
+            <div class="role-card bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-light-blue rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-navy-blue mb-2">Order Manager</h2>
+                    <p class="text-gray-600 text-center mb-4">Track and process customer orders and deliveries</p>
+                    <button class="login-btn w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300" data-role="order-manager">
+                        Login
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin -->
+            <div class="role-card bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6 flex flex-col items-center">
+                    <div class="w-20 h-20 bg-light-blue rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-navy-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl font-semibold text-navy-blue mb-2">Admin</h2>
+                    <p class="text-gray-600 text-center mb-4">Full system access for administrative functions</p>
+                    <button class="login-btn w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300" data-role="admin">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modals -->
+        <div id="modal-container" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <!-- Retailer Login Modal -->
+            <div id="retailer-modal" class="modal bg-white rounded-lg shadow-xl max-w-3xl w-full mx-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-navy-blue">Retailer Login</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form class="login-form">
+                        <div class="mb-4">
+                            <label for="retailer-username" class="block text-gray-700 text-sm font-medium mb-2">Username</label>
+                            <input type="text" id="retailer-username" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="retailer-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="retailer-password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <button type="submit" class="w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Supervisor Login Modal -->
+            <div id="supervisor-modal" class="modal bg-white rounded-lg shadow-xl max-w-3xl w-full mx-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-navy-blue">Supervisor Login</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form class="login-form">
+                        <div class="mb-4">
+                            <label for="supervisor-username" class="block text-gray-700 text-sm font-medium mb-2">Username</label>
+                            <input type="text" id="supervisor-username" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="supervisor-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="supervisor-password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <button type="submit" class="w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Order Manager Login Modal -->
+            <div id="order-manager-modal" class="modal bg-white rounded-lg shadow-xl max-w-3xl w-full mx-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-navy-blue">Order Manager Login</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form class="login-form">
+                        <div class="mb-4">
+                            <label for="order-manager-username" class="block text-gray-700 text-sm font-medium mb-2">Username</label>
+                            <input type="text" id="order-manager-username" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="order-manager-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="order-manager-password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <button type="submit" class="w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Login Modal -->
+            <div id="admin-modal" class="modal bg-white rounded-lg shadow-xl max-w-3xl w-full mx-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-navy-blue">Admin Login</h3>
+                        <button class="close-modal text-gray-500 hover:text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <form class="login-form">
+                        <div class="mb-4">
+                            <label for="admin-username" class="block text-gray-700 text-sm font-medium mb-2">Username</label>
+                            <input type="text" id="admin-username" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="admin-password" class="block text-gray-700 text-sm font-medium mb-2">Password</label>
+                            <input type="password" id="admin-password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-light-blue focus:border-transparent text-base" required>
+                        </div>
+                        <button type="submit" class="w-full bg-navy-blue hover:bg-blue-800 text-white font-medium py-2 px-4 rounded transition-colors duration-300">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8 mt-12 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-semibold text-navy-blue mb-4">About the Creators</h3>
+                <p class="text-gray-600 mb-2">Retail Prototype Application v1.0</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <!-- Creator 1 -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <h4 class="font-medium text-navy-blue mb-2">John Smith</h4>
+                    <p class="text-gray-600 mb-1">Lead Developer</p>
+                    <p class="text-gray-600 mb-1">
+                        <span class="font-medium">Email:</span> 
+                        <a href="mailto:john.smith@example.com" class="text-light-blue hover:underline">john.smith@example.com</a>
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Phone:</span> 
+                        <a href="tel:+11234567890" class="hover:underline">+1 (123) 456-7890</a>
+                    </p>
+                </div>
+                
+                <!-- Creator 2 -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <h4 class="font-medium text-navy-blue mb-2">Emily Johnson</h4>
+                    <p class="text-gray-600 mb-1">UI/UX Designer</p>
+                    <p class="text-gray-600 mb-1">
+                        <span class="font-medium">Email:</span> 
+                        <a href="mailto:emily.johnson@example.com" class="text-light-blue hover:underline">emily.johnson@example.com</a>
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Phone:</span> 
+                        <a href="tel:+12345678901" class="hover:underline">+1 (234) 567-8901</a>
+                    </p>
+                </div>
+                
+                <!-- Creator 3 -->
+                <div class="bg-white p-4 rounded-lg shadow-md">
+                    <h4 class="font-medium text-navy-blue mb-2">Michael Chen</h4>
+                    <p class="text-gray-600 mb-1">Backend Developer</p>
+                    <p class="text-gray-600 mb-1">
+                        <span class="font-medium">Email:</span> 
+                        <a href="mailto:michael.chen@example.com" class="text-light-blue hover:underline">michael.chen@example.com</a>
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Phone:</span> 
+                        <a href="tel:+13456789012" class="hover:underline">+1 (345) 678-9012</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 text-gray-500 text-sm">
+                <p>&copy; 2023 Retail Prototype. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check for dark mode preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Login functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalContainer = document.getElementById('modal-container');
+            const loginButtons = document.querySelectorAll('.login-btn');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            const loginForms = document.querySelectorAll('.login-form');
+            const modals = document.querySelectorAll('.modal');
+
+            // Show modal for the selected role
+            loginButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const role = this.getAttribute('data-role');
+                    const modal = document.getElementById(`${role}-modal`);
+                    
+                    // Hide all modals first
+                    modals.forEach(m => m.classList.remove('active'));
+                    
+                    // Show the selected modal
+                    modal.classList.add('active');
+                    modalContainer.classList.remove('hidden');
+                    
+                    // Focus on username field
+                    setTimeout(() => {
+                        document.getElementById(`${role}-username`).focus();
+                    }, 100);
+                });
+            });
+
+            // Close modal when clicking the close button
+            closeButtons.forEach(button => {
+                button.addEventListener('click', closeModal);
+            });
+
+            // Close modal when clicking outside
+            modalContainer.addEventListener('click', function(e) {
+                if (e.target === modalContainer) {
+                    closeModal();
+                }
+            });
+
+            // Handle form submissions
+            loginForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Here you would typically handle authentication
+                    // For demo purposes, we'll just close the modal
+                    
+                    // Find the inputs in this form
+                    const inputs = this.querySelectorAll('input');
+                    let isValid = true;
+                    
+                    // Basic validation - check if fields are empty
+                    inputs.forEach(input => {
+                        if (!input.value.trim()) {
+                            isValid = false;
+                            input.classList.add('border-red-500');
+                        } else {
+                            input.classList.remove('border-red-500');
+                        }
+                    });
+                    
+                    if (isValid) {
+                        // Show a success message (in a real app, you'd verify credentials)
+                        alert('Login successful! (Demo purposes only)');
+                        closeModal();
+                    }
+                });
+            });
+
+            // Function to close the modal
+            function closeModal() {
+                modals.forEach(modal => modal.classList.remove('active'));
+                setTimeout(() => {
+                    modalContainer.classList.add('hidden');
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>
