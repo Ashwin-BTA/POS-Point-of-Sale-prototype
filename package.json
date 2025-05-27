@@ -1,0 +1,20 @@
+{
+  "name": "retail_system-",
+  "version": "1.0.0",
+  "description": "A prototype for the Retail Market Designed and Created by Ashiwn Bhatasara email: ashwinbta@gmail.com Bight: brightchivhenge@gmail.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashwin-BTA/Retail_System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashwin-BTA/Retail_System/issues"
+  },
+  "homepage": "https://github.com/Ashwin-BTA/Retail_System#readme"
+}
